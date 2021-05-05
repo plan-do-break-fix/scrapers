@@ -18,11 +18,11 @@ def collect_tags(page: int) -> List:
     """Return all tags from tag listing page number <page>."""
     if not 0 < pages < 1799:  # 1798 pages as of 2021.05.05
         raise RuntimeError
-        url = "https://stackoverflow.com/tags?page={page}&tab=popular"
-        resp = requests.get(url, headers=HEADERS)
-        if resp.status_code != 200:
-            raise RuntimeError
-        soup = BeautifulSoup(resp.content)
-        return [card.find("div", {"class": "grid"}).find("a").text
-                for card in soup.find_all("div", {"class": "s-card"})]
+    url = "https://stackoverflow.com/tags?page={page}&tab=popular"
+    resp = requests.get(url, headers=HEADERS)
+    if resp.status_code != 200:
+        raise RuntimeError
+    soup = BeautifulSoup(resp.content)
+    return [card.find("div", {"class": "grid"}).find("a").text
+            for card in soup.find_all("div", {"class": "s-card"})]
         
